@@ -14,7 +14,8 @@
 
 ## 2. ER 다이어그램
 
-![ER 다이어그램](./images/er_diagram.png)
+![ER 다이어그램](<img width="321" height="154" alt="image" src="https://github.com/user-attachments/assets/5b15eaaa-a69d-43c1-932b-63448ba6b20c" />
+)
 
 > `schedule` 테이블은 일정의 제목(title), 상세내용(content), 작성자명(name), 비밀번호(password),  
 > 생성 및 수정 일시(createdAt, modifiedAt)를 저장합니다.
