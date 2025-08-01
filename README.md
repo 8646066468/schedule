@@ -12,3 +12,14 @@
 
 ### 2. ER 다이어그램
 <img width="321" height="153" alt="image" src="https://github.com/user-attachments/assets/afbad70c-1749-4a0b-a5d4-ed8518830f86" />
+
+
+CREATE TABLE schedule (
+      id BIGINT AUTO_INCREMENT PRIMARY KEY,
+      task VARCHAR(255) NOT NULL,
+      content TEXT  NOT NULL,
+      password VARCHAR(255) NOT NULL,
+      member_name VARCHAR(255) NOT NULL,
+      created_at DATETIME NOT NULL,
+      updated_at DATETIME NOT NULL
+)
