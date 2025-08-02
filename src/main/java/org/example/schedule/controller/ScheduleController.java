@@ -37,15 +37,23 @@ public class ScheduleController {
     public ResponseEntity<ScheduleResponse> getFindId(@PathVariable Long schedulesId) {
         return ResponseEntity.ok(scheduleService.getScheduleById(schedulesId));
     }
+
     // 업데이트 수정
     @PatchMapping("/schedules/{schedulesId}")
-    public ResponseEntity<ScheduleResponse> updateSchedule (
+    public ResponseEntity<ScheduleResponse> updateSchedule(
             @PathVariable Long schedulesId,
             @RequestBody ScheduleRequest scheduleRequest
-    ){
-        return  ResponseEntity.ok(scheduleService.updateSchedule(schedulesId, scheduleRequest));
+    ) {
+        return ResponseEntity.ok(scheduleService.updateSchedule(schedulesId, scheduleRequest));
     }
 
+    @DeleteMapping("/schedules/{schedulesId}")
+    public void DeleteSchedule(
+            @PathVariable Long schedulesId,
+            @RequestBody ScheduleRequest scheduleRequest
+    ) {
+        scheduleService.deleteScheduleById(schedulesId, scheduleRequest);
+    }
 }
 
 

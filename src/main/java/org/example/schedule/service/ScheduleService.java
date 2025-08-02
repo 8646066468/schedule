@@ -1,7 +1,5 @@
 package org.example.schedule.service;
 
-import jakarta.persistence.EntityNotFoundException;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.example.schedule.dto.ScheduleRequest;
 import org.example.schedule.dto.ScheduleResponse;
@@ -37,8 +35,6 @@ public class ScheduleService {
     }
 
     //전체 조회
-
-
     @Transactional(readOnly = true)
     public List<ScheduleResponse> getSchedule(String name) {
         List<Schedule> schedulesList;
@@ -69,21 +65,36 @@ public class ScheduleService {
     @Transactional(readOnly = true)
     public ScheduleResponse getScheduleById(Long id) {
         Schedule schedule = scheduleRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("그런 일정이 없는데?")
+                () -> new IllegalArgumentException("그런 일정이 없는데?")
         );
         return new ScheduleResponse(schedule.getId(), schedule.getTitle(), schedule.getContent(), schedule.getName(), schedule.getCreatedAt(), schedule.getModifiedAt());
     }
+
     // 일정 수정
     @Transactional
     public ScheduleResponse updateSchedule(Long id, ScheduleRequest scheduleRequest) {
         Schedule schedule = scheduleRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("그런 일정이 없는데?")
+                () -> new IllegalArgumentException("그런 일정이 없는데?")
         );
-        if(!scheduleRequest.getPassword().equals(schedule.getPassword())) {
+        if (!scheduleRequest.getPassword().equals(schedule.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 일치하지 않다");
         }
 
         schedule.updateSchedule(scheduleRequest.getContent(), scheduleRequest.getTitle());
         return new ScheduleResponse(schedule.getId(), schedule.getTitle(), schedule.getContent(), schedule.getName(), schedule.getCreatedAt(), schedule.getModifiedAt());
+    }
+
+    // 조건 삭제
+    @Transactional
+    public void deleteScheduleById(Long id, ScheduleRequest scheduleRequest) {
+        Schedule schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("그런 아이디 없는데요?")
+        );
+        {
+            if (!scheduleRequest.getPassword().equals(schedule.getPassword())) {
+                throw new IllegalArgumentException("비밀번호가 일치하지 않다");
+            }
+            scheduleRepository.delete(schedule);
+        }
     }
 }

@@ -1,4 +1,5 @@
 package org.example.schedule.entity;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class Schedule extends BaseEntity {
         this.password = password;
         this.name = name;
     }
+
     public void updateSchedule(String content, String title) {
         this.content = content;
         this.title = title;
