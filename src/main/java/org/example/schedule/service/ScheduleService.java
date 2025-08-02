@@ -73,5 +73,17 @@ public class ScheduleService {
         );
         return new ScheduleResponse(schedule.getId(), schedule.getTitle(), schedule.getContent(), schedule.getName(), schedule.getCreatedAt(), schedule.getModifiedAt());
     }
+    // 일정 수정
+    @Transactional
+    public ScheduleResponse updateSchedule(Long id, ScheduleRequest scheduleRequest) {
+        Schedule schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("그런 일정이 없는데?")
+        );
+        if(!scheduleRequest.getPassword().equals(schedule.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않다");
+        }
 
+        schedule.updateSchedule(scheduleRequest.getContent(), scheduleRequest.getTitle());
+        return new ScheduleResponse(schedule.getId(), schedule.getTitle(), schedule.getContent(), schedule.getName(), schedule.getCreatedAt(), schedule.getModifiedAt());
+    }
 }

@@ -11,8 +11,10 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 
-public class Schedule extends BaseEntity{
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Schedule extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
     private String title;
@@ -25,4 +27,9 @@ public class Schedule extends BaseEntity{
         this.password = password;
         this.name = name;
     }
+    public void updateSchedule(String content, String title) {
+        this.content = content;
+        this.title = title;
+    }
+
 }
