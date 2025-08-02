@@ -30,7 +30,12 @@ public class ScheduleController {
         List<ScheduleResponse> schedule= scheduleService.getSchedule(name);
         return ResponseEntity.ok(schedule);
     }
+    // 단건 조회
+    @GetMapping("/schedules/{schedulesId}")
+    public ResponseEntity<ScheduleResponse> getFindId(@PathVariable Long schedulesId) {
+        return ResponseEntity.ok(scheduleService.getScheduleById(schedulesId));
+    }
 }
-    // 전체 조회
+
 
 

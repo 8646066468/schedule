@@ -1,5 +1,6 @@
 package org.example.schedule.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.example.schedule.dto.ScheduleRequest;
@@ -37,7 +38,7 @@ public class ScheduleService {
 
     //전체 조회
 
-    @Builder
+
     @Transactional(readOnly = true)
     public List<ScheduleResponse> getSchedule(String name) {
         List<Schedule> schedulesList;
@@ -64,6 +65,13 @@ public class ScheduleService {
         return scheduleResponses;
     }
 
-
+    //단건 조회
+    @Transactional(readOnly = true)
+    public ScheduleResponse getScheduleById(Long id) {
+        Schedule schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("그런 일정이 없는데?")
+        );
+        return new ScheduleResponse(schedule.getId(), schedule.getTitle(), schedule.getContent(), schedule.getName(), schedule.getCreatedAt(), schedule.getModifiedAt());
+    }
 
 }
