@@ -79,9 +79,15 @@ public class ScheduleService {
         if (!scheduleRequest.getPassword().equals(schedule.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 일치하지 않다");
         }
-
         schedule.updateSchedule(scheduleRequest.getContent(), scheduleRequest.getTitle());
-        return new ScheduleResponse(schedule.getId(), schedule.getTitle(), schedule.getContent(), schedule.getName(), schedule.getCreatedAt(), schedule.getModifiedAt());
+        scheduleRepository.saveAndFlush(schedule);
+        return new ScheduleResponse(
+                schedule.getId(),
+                schedule.getTitle(),
+                schedule.getContent(),
+                schedule.getName(),
+                schedule.getCreatedAt(),
+                schedule.getModifiedAt());
     }
 
     // 조건 삭제

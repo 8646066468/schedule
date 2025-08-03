@@ -7,11 +7,11 @@ import jakarta.persistence.Entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Getter
 @RequiredArgsConstructor
-
 public class Schedule extends BaseEntity {
 
     @Id
@@ -31,7 +31,7 @@ public class Schedule extends BaseEntity {
 
     public void updateSchedule(String content, String title) {
         this.content = content;
-        this.title = title;
+        this.name = name;
     }
 
 }
