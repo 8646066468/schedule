@@ -1,5 +1,4 @@
 package org.example.schedule.service;
-
 import lombok.RequiredArgsConstructor;
 import org.example.schedule.dto.ScheduleRequest;
 import org.example.schedule.dto.ScheduleResponse;
@@ -7,11 +6,12 @@ import org.example.schedule.entity.Schedule;
 import org.example.schedule.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.lang.model.element.Name;
 import java.util.ArrayList;
 import java.util.List;
-
+/* t
+                    수정해야할 부분: 일정 수정에서  ResponseDto가 하나밖에 없어서 REPONSE를 추가해서 content와 name, getModifiedAt만 받아오게 만들기
+                    이부분은 과제부분말고 schedule2라는 프로젝트에서 새로 만들어볼예정
+                */
 @Service
 @RequiredArgsConstructor
 public class ScheduleService {
@@ -19,7 +19,6 @@ public class ScheduleService {
 
     //생성
     @Transactional
-
     public ScheduleResponse saveSchedule(ScheduleRequest scheduleRequest) {
         Schedule schedule = new Schedule(scheduleRequest.getContent(), scheduleRequest.getTitle(), scheduleRequest.getPassword(), scheduleRequest.getName());
         Schedule savedSchedule = scheduleRepository.save(schedule);
@@ -81,7 +80,8 @@ public class ScheduleService {
         }
         schedule.updateSchedule(scheduleRequest.getContent(), scheduleRequest.getTitle());
         scheduleRepository.saveAndFlush(schedule);
-        return new ScheduleResponse(
+        return new ScheduleResponse(//
+
                 schedule.getId(),
                 schedule.getTitle(),
                 schedule.getContent(),
