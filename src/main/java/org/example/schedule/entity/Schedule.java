@@ -4,10 +4,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Entity;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Getter
@@ -29,7 +27,7 @@ public class Schedule extends BaseEntity {
         this.name = name;
     }
 
-    public void updateSchedule(String content, String title) {
+    public void updateSchedule(String content, String name) {
         this.content = content;
         this.name = name;
     }

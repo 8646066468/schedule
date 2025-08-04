@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class ScheduleResponse {//q: 레코드란건 도대체 뭔가요? 무시해도되는 걸까요?
+public class ScheduleResponse {
     private final Long id;
     private final String title;
     private final String content;
